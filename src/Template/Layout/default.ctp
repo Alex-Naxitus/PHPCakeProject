@@ -42,17 +42,22 @@ $noms="Cornec,Bouthemy";
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
+                <h1><?= $this->Html->link("Page1",[""]); ?></h1>
             </li>
         </ul>
+		
         <div class="top-bar-section">
             <ul class="right">
                 <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
                 <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
             </ul>
         </div>
+		
 		<div class="header">
-		 <a href="/pages/home" class="button" target="_blank">Home </a>
+		 
+		 <?= $this->Html->link("Home",["controller"=> "Arenas",'action'=>'index']); ?>
+		 <?= $this->Html->link("Login",["controller"=> "Arenas",'action'=>'login']); ?>
+		 
 		</div>
     </nav>
     <?= $this->Flash->render() ?>
@@ -60,7 +65,9 @@ $noms="Cornec,Bouthemy";
         <?= $this->fetch('content') ?>
     </div>
     <footer>
+		<?= "All rights reserved by the group : " ?>
 		<?= $groupe ?>
+		<?= ", composed of : " ?>
 		<?= $noms ?>
     </footer>
 </body>
