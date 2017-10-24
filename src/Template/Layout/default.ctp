@@ -16,6 +16,8 @@
 $cakeDescription = 'CakePHP: the rapid development php framework';
 $groupe="Cornec_Bouthemy";
 $noms="Cornec,Bouthemy";
+$username;
+$password;
 
 ?>
 <!DOCTYPE html>
@@ -56,7 +58,11 @@ $noms="Cornec,Bouthemy";
 		<div class="header">
 		 
 		 <?= $this->Html->link("Home",["controller"=> "Arenas",'action'=>'index']); ?>
-		 <?= $this->Html->link("Login",["controller"=> "Arenas",'action'=>'login']); ?>
+		 <?= $this->Html->link("Register",["controller"=> "Users",'action'=>'add']); ?>
+		 <?= $this->Html->link("Login",["controller"=> "Users",'action'=>'login']); ?>
+		 <?= $this->Html->link("Fighter",["controller"=> "Arenas",'action'=>'fighter']); ?>
+		 <?= $this->Html->link("Sight",["controller"=> "Arenas",'action'=>'sight']); ?>
+		 <?= $this->Html->link("Events",["controller"=> "Arenas",'action'=>'event']); ?>
 		 
 		</div>
     </nav>

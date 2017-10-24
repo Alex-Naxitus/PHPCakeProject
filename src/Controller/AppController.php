@@ -27,6 +27,8 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
+	
+
 
     /**
      * Initialization hook method.
@@ -43,6 +45,27 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+			
+			$this->loadComponent('Auth', [
+             'authenticate' => [
+                'Form' => [
+                    'userModel'=>'users',
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ], 
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            // If the user arrives on an unauthorized page,
+            // redirects to the previous page.
+            'unauthorizedRedirect' => $this->referer()
+        ]);
+		
+		  
 
         /*
          * Enable the following components for recommended CakePHP security settings.
@@ -68,5 +91,10 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+    }
+	
+	public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow(['index', 'view', 'display', 'event','fighter','sight']);
     }
 }

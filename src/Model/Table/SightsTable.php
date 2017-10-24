@@ -4,7 +4,7 @@ namespace App\Model\Table;
 
 use Cake\ORM\Table;
 
-class FightersTable extends Table
+class SightsTable extends Table
 {
 public function test()
 {
