@@ -11,7 +11,8 @@
 </div>
 
 
-
+<? echo " level : ".$myfighter->level." - xp : ".$myfighter->xp." - current health : ".$myfighter->current_health."\n"; ?>
+<? echo " - enemy health : ".$efighter->current_health." - enemy level : ".$efighter->level."\n"; ?>
 
 <table>
 <tr>
@@ -23,78 +24,58 @@
 	<th>5</th>
 	<th>6</th>
 	<th>7</th>
+	<th>8</th>
+    <th>9</th> 
+    <th>10</th>
+	<th>11</th>
+	<th>12</th>
+	<th>13</th>
+	<th>14</th>
+	<th>15</th>
   </tr>
-  <tr>
-    <td>1</td>
-    <td><? if($myfighter->coordinate_x==1 && $myfighter->coordinate_y==1 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==2 && $myfighter->coordinate_y==1 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==3 && $myfighter->coordinate_y==1 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==4 && $myfighter->coordinate_y==1 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==5 && $myfighter->coordinate_y==1 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==6 && $myfighter->coordinate_y==1 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==7 && $myfighter->coordinate_y==1 ){echo "X";}?></td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td><? if($myfighter->coordinate_x==1 && $myfighter->coordinate_y==2 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==2 && $myfighter->coordinate_y==2 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==3 && $myfighter->coordinate_y==2 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==4 && $myfighter->coordinate_y==2 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==5 && $myfighter->coordinate_y==2 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==6 && $myfighter->coordinate_y==2 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==7 && $myfighter->coordinate_y==2 ){echo "X";}?></td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td><? if($myfighter->coordinate_x==1 && $myfighter->coordinate_y==3 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==2 && $myfighter->coordinate_y==3 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==3 && $myfighter->coordinate_y==3 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==4 && $myfighter->coordinate_y==3 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==5 && $myfighter->coordinate_y==3 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==6 && $myfighter->coordinate_y==3 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==7 && $myfighter->coordinate_y==3 ){echo "X";}?></td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td><? if($myfighter->coordinate_x==1 && $myfighter->coordinate_y==4 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==2 && $myfighter->coordinate_y==4 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==3 && $myfighter->coordinate_y==4 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==4 && $myfighter->coordinate_y==4 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==5 && $myfighter->coordinate_y==4 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==6 && $myfighter->coordinate_y==4 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==7 && $myfighter->coordinate_y==4 ){echo "X";}?></td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td><? if($myfighter->coordinate_x==1 && $myfighter->coordinate_y==5 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==2 && $myfighter->coordinate_y==5 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==3 && $myfighter->coordinate_y==5 ){echo "X";}?></td> 
-	<td><? if($myfighter->coordinate_x==4 && $myfighter->coordinate_y==5 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==5 && $myfighter->coordinate_y==5 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==6 && $myfighter->coordinate_y==5 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==7 && $myfighter->coordinate_y==5 ){echo "X";}?></td>
-  </tr>
-  <tr>
-    <td>6</td>
-    <td><? if($myfighter->coordinate_x==1 && $myfighter->coordinate_y==6 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==2 && $myfighter->coordinate_y==6 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==3 && $myfighter->coordinate_y==6 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==4 && $myfighter->coordinate_y==6 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==5 && $myfighter->coordinate_y==6 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==6 && $myfighter->coordinate_y==6 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==7 && $myfighter->coordinate_y==6 ){echo "X";}?></td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td><? if($myfighter->coordinate_x==1 && $myfighter->coordinate_y==7 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==2 && $myfighter->coordinate_y==7 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==3 && $myfighter->coordinate_y==7 ){echo "X";}?></td> 
-    <td><? if($myfighter->coordinate_x==4 && $myfighter->coordinate_y==7 ){echo "X";}?></td>
-	<td><? if($myfighter->coordinate_x==5 && $myfighter->coordinate_y==7 ){echo "X";}?></td> 
-	<td><? if($myfighter->coordinate_x==6 && $myfighter->coordinate_y==7 ){echo "X";}?></td>
-    <td><? if($myfighter->coordinate_x==7 && $myfighter->coordinate_y==7 ){echo "X";}?></td>
-  </tr>
-  
+<?
 
+for($i=1;$i<11;$i++)
+{
+echo "<tr>"; 
+
+
+for($j=0;$j<16;$j++)
+{
+if($j==0 ){
+echo "<td>$i</td>";
+}
+
+if($j>0){
+if($myfighter->coordinate_x==$j && $myfighter->coordinate_y==$i ){echo "<td>X</td>";}
+	else{ 
+
+	if($efighter->coordinate_x==$j && $efighter->coordinate_y==$i ){
+	if( (sqrt(($myfighter->coordinate_x - $efighter->coordinate_x)*($myfighter->coordinate_x - $efighter->coordinate_x)) <= $myfighter->skill_sight) 
+	&& (sqrt(($myfighter->coordinate_y - $efighter->coordinate_y)*($myfighter->coordinate_y - $efighter->coordinate_y)) <= $myfighter->skill_sight)){
+	echo "<td>E</td>";}else {echo"<td></td>";}
+
+
+
+	}
+		else {echo"<td></td>";}
+
+	}
+	}
+
+
+
+}
+
+
+
+
+echo "</tr>";
+}
+?>
 
 </table>
+
+
+
+

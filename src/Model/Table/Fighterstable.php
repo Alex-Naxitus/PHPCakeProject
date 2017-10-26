@@ -6,11 +6,8 @@ use Cake\ORM\Table;
 
 class FightersTable extends Table
 {
-public function test()
-{
-	return("ok");
-}
 	
+	 
 
 
 
