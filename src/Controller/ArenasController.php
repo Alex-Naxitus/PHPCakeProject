@@ -2,6 +2,7 @@
 namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\I18n\Time;
 
 /**
 * Personal Controller
@@ -23,7 +24,7 @@ public function fighter()
 	$fighters= TableRegistry :: get('Fighters');
 	$fighter = $fighters->get($fighterid);
 	$this->set('myfighter',$fighter);
-	 
+	
 	
 	if ($this->request->is('post')) {
 		$order=$this->request->getData();
@@ -50,6 +51,16 @@ public function fighter()
 			$fighter->coordinate_x=$x;
 			$fighter->coordinate_y=$y;
 			}
+			
+			$requestData = [
+							'name' => "".$fighter->name." REGENERATED",
+							'date' =>  Time::now(),
+							'coordinate_x' => $fighter->coordinate_x,
+							'coordinate_y' => $fighter->coordinate_y
+							];
+				$this->loadModel('Events');
+				$newevent = $this->Events->newEntity($requestData);
+				$this->Events->save($newevent);
 		}
 		
 		
@@ -119,6 +130,7 @@ public function sight()
 				if(!(($fighter->coordinate_y-1 == $myefighter->coordinate_y) && ($fighter->coordinate_x == $myefighter->coordinate_x)))
 				{
 				$fighter->coordinate_y = $fighter->coordinate_y-1;
+				$myattackaction="".$fighter->name." MOVED UP ";
 				}
 				if(($fighter->coordinate_y-1 == $myefighter->coordinate_y) && ($fighter->coordinate_x == $myefighter->coordinate_x)){
 					
@@ -126,15 +138,17 @@ public function sight()
 					
 					if( $myattack >(10- $fighter->level + $myefighter->level))
 					{
-						$myattackaction= "Previous action : ".$fighter->name." HIT ".$myefighter->name;
+						
 						$myefighter->current_health=$myefighter->current_health-$fighter->skill_strength;
 						if($myefighter->current_health<=0){
 						$fighter->xp=$fighter->xp+$myefighter->level;
 						$myefighter->coordinate_x=NULL;
 						$myefighter->coordinate_y=NULL;
-						$this->Flash->success("You killed your enemy");
+						$myattackaction="".$fighter->name." KILLED ".$myefighter->name;
 						}
+						
 						else{
+						$myattackaction= "".$fighter->name." HIT ".$myefighter->name;
 						$fighter->xp++;
 						}
 						
@@ -142,7 +156,7 @@ public function sight()
 					}
 					else
 					{
-						$myattackaction= "Previous action : ".$fighter->name." MISSED ".$myefighter->name;
+						$myattackaction= "".$fighter->name." MISSED ".$myefighter->name;
 						$this->Flash->success($myattackaction);
 						
 						$fighter->current_health=$fighter->current_health-$myefighter->skill_strength;
@@ -152,12 +166,27 @@ public function sight()
 						$fighter->coordinate_x=NULL;
 						$fighter->coordinate_y=NULL;
 						$this->Flash->success("You are dead, go to Fighter to regenerate your fighter");
+						$myattackaction= "".$myefighter->name." KILLED ".$fighter->name;
 						}
 						
 						
 					}
 				}
+				
+				$requestData = [
+							'name' => "".$myattackaction,
+							'date' =>  Time::now(),
+							'coordinate_x' => $fighter->coordinate_x,
+							'coordinate_y' => $fighter->coordinate_y
+							];
+				$this->loadModel('Events');
+				$newevent = $this->Events->newEntity($requestData);
+				$this->Events->save($newevent);
+				
 			}
+			
+			
+			
 			$fighters->save($myefighter);
  			$fighters->save($fighter);
 			
@@ -172,6 +201,7 @@ public function sight()
 				if(!(($fighter->coordinate_y+1 == $myefighter->coordinate_y) && ($fighter->coordinate_x == $myefighter->coordinate_x)))
 				{
 				$fighter->coordinate_y = $fighter->coordinate_y+1;
+				$myattackaction="".$fighter->name." MOVED DOWN ";
 				}
 				if(($fighter->coordinate_y+1 == $myefighter->coordinate_y) && ($fighter->coordinate_x == $myefighter->coordinate_x)){
 					
@@ -179,15 +209,17 @@ public function sight()
 					
 					if( $myattack >(10- $fighter->level + $myefighter->level))
 					{
-						$myattackaction= "Previous action : ".$fighter->name." HIT ".$myefighter->name;
+						$myattackaction= "".$fighter->name." HIT ".$myefighter->name;
 						$myefighter->current_health=$myefighter->current_health-$fighter->skill_strength;
 						if($myefighter->current_health<=0){
 						$fighter->xp=$fighter->xp+$myefighter->level;
 						$myefighter->coordinate_x=NULL;
 						$myefighter->coordinate_y=NULL;
 						$this->Flash->success("You killed your enemy");
+						$myattackaction="".$fighter->name." KILLED ".$myefighter->name;
 						}
 						else{
+						$myattackaction= "".$fighter->name." HIT ".$myefighter->name;
 						$fighter->xp++;
 						}
 						
@@ -195,7 +227,7 @@ public function sight()
 					}
 					else
 					{
-						$myattackaction= "Previous action : ".$fighter->name." MISSED ".$myefighter->name;
+						$myattackaction= "".$fighter->name." MISSED ".$myefighter->name;
 						$this->Flash->success($myattackaction);
 						$fighter->current_health=$fighter->current_health-$myefighter->skill_strength;
 						
@@ -204,10 +236,21 @@ public function sight()
 						$fighter->coordinate_x=NULL;
 						$fighter->coordinate_y=NULL;
 						$this->Flash->success("You are dead, go to Fighter to regenerate your fighter");
+						$myattackaction= "".$myefighter->name." KILLED ".$fighter->name;
 						}
 						
 					}
 				}
+				
+				$requestData = [
+							'name' => "".$myattackaction,
+							'date' =>  Time::now(),
+							'coordinate_x' => $fighter->coordinate_x,
+							'coordinate_y' => $fighter->coordinate_y
+							];
+				$this->loadModel('Events');
+				$newevent = $this->Events->newEntity($requestData);
+				$this->Events->save($newevent);
 			}
 			$fighters->save($myefighter);
  			$fighters->save($fighter);
@@ -221,6 +264,7 @@ public function sight()
 				if(!(($fighter->coordinate_y == $myefighter->coordinate_y) && ($fighter->coordinate_x-1 == $myefighter->coordinate_x)))
 				{
 				$fighter->coordinate_x = $fighter->coordinate_x-1;
+				$myattackaction="".$fighter->name." MOVED LEFT ";
 				}
 				if(($fighter->coordinate_y == $myefighter->coordinate_y) && ($fighter->coordinate_x-1 == $myefighter->coordinate_x)){
 					
@@ -228,15 +272,17 @@ public function sight()
 					
 					if( $myattack >(10- $fighter->level + $myefighter->level))
 					{
-						$myattackaction= "Previous action : ".$fighter->name." HIT ".$myefighter->name;
+						$myattackaction= "".$fighter->name." HIT ".$myefighter->name;
 						$myefighter->current_health=$myefighter->current_health-$fighter->skill_strength;
 						if($myefighter->current_health<=0){
 						$fighter->xp=$fighter->xp+$myefighter->level;
 						$myefighter->coordinate_x=NULL;
 						$myefighter->coordinate_y=NULL;
 						$this->Flash->success("You killed your enemy");
+						$myattackaction="".$fighter->name." KILLED ".$myefighter->name;
 						}
 						else{
+						$myattackaction= "".$fighter->name." HIT ".$myefighter->name;
 						$fighter->xp++;
 						}
 						
@@ -244,7 +290,7 @@ public function sight()
 					}
 					else
 					{
-						$myattackaction= "Previous action : ".$fighter->name." MISSED ".$myefighter->name;
+						$myattackaction= "".$fighter->name." MISSED ".$myefighter->name;
 						$this->Flash->success($myattackaction);
 						$fighter->current_health=$fighter->current_health-$myefighter->skill_strength;
 						
@@ -253,9 +299,21 @@ public function sight()
 						$fighter->coordinate_x=NULL;
 						$fighter->coordinate_y=NULL;
 						$this->Flash->success("You are dead, go to Fighter to regenerate your fighter");
+						$myattackaction= "".$myefighter->name." KILLED ".$fighter->name;
 						}
 					}
 				}
+				
+				$requestData = [
+							'name' => "".$myattackaction,
+							'date' =>  Time::now(),
+							'coordinate_x' => $fighter->coordinate_x,
+							'coordinate_y' => $fighter->coordinate_y
+							];
+				$this->loadModel('Events');
+				$newevent = $this->Events->newEntity($requestData);
+				$this->Events->save($newevent);
+				
 			}
 			$fighters->save($myefighter);
  			$fighters->save($fighter);
@@ -269,6 +327,7 @@ public function sight()
 				if(!(($fighter->coordinate_y == $myefighter->coordinate_y) && ($fighter->coordinate_x+1 == $myefighter->coordinate_x)))
 				{
 				$fighter->coordinate_x = $fighter->coordinate_x+1;
+				$myattackaction="".$fighter->name." MOVED RIGHT ";
 				}
 				if(($fighter->coordinate_y == $myefighter->coordinate_y) && ($fighter->coordinate_x+1 == $myefighter->coordinate_x)){
 					
@@ -276,15 +335,16 @@ public function sight()
 					
 					if( $myattack >(10- $fighter->level + $myefighter->level))
 					{
-						$myattackaction= "Previous action : ".$fighter->name." HIT ".$myefighter->name;
 						$myefighter->current_health=$myefighter->current_health-$fighter->skill_strength;
 						if($myefighter->current_health<=0){
 						$fighter->xp=$fighter->xp+$myefighter->level;
 						$myefighter->coordinate_x=NULL;
 						$myefighter->coordinate_y=NULL;
 						$this->Flash->success("You killed your enemy");
+						$myattackaction="".$fighter->name." KILLED ".$myefighter->name;
 						}
 						else{
+						$myattackaction= "".$fighter->name." HIT ".$myefighter->name;
 						$fighter->xp++;
 						}
 						
@@ -301,15 +361,26 @@ public function sight()
 						$fighter->coordinate_x=NULL;
 						$fighter->coordinate_y=NULL;
 						$this->Flash->success("You are dead, go to Fighter to regenerate your fighter");
+						$myattackaction= "".$myefighter->name." KILLED ".$fighter->name;
 						}
 					}
 				}
+				
+				$requestData = [
+							'name' => "".$myattackaction,
+							'date' =>  Time::now(),
+							'coordinate_x' => $fighter->coordinate_x,
+							'coordinate_y' => $fighter->coordinate_y
+							];
+				$this->loadModel('Events');
+				$newevent = $this->Events->newEntity($requestData);
+				$this->Events->save($newevent);
+				
 			}
 			$fighters->save($myefighter);
  			$fighters->save($fighter);
 			return $this->redirect($this->here);
 			break;
-			
 			
 		}
     
@@ -320,10 +391,23 @@ public function sight()
 public function event()
 {
 	$eventid=1;
-	$this->loadModel('Events');
-	$this->set('myevent',$this->Events->get($eventid));
+	
+	$this->loadmodel('Events');
+	
+ $recentevents = $this->Events->find(
+  'all',
+  array(
+    'conditions' => array(
+      'Events.date >=' => date('Y-m-d H:i:s', strtotime('-24 hour'))
+    )
+  )
+);
+
+$this->set('recentevents',$recentevents);
 
 }
+
+
 
 
 
