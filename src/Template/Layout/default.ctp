@@ -58,6 +58,7 @@ $password;
 		<div class="header">
 		 
 		 <?= $this->Html->link("Home",["controller"=> "Arenas",'action'=>'index']); ?>
+		 <?= $this->Html->link("Register",["controller"=> "Arenas",'action'=>'add']); ?>
 		 <?= $this->Html->link("Login",["controller"=> "Arenas",'action'=>'login']); ?>
 		 <?= $this->Html->link("Fighter",["controller"=> "Arenas",'action'=>'fighter']); ?>
 		 <?= $this->Html->link("Sight",["controller"=> "Arenas",'action'=>'sight']); ?>
