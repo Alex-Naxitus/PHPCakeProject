@@ -41,20 +41,30 @@ class AppController extends Controller
      */
     public function initialize()
     {
-        parent::initialize();
-
-        $this->loadComponent('RequestHandler');
+		$this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        
-		
-		  
-
-        /*
-         * Enable the following components for recommended CakePHP security settings.
-         * see https://book.cakephp.org/3.0/en/controllers/components/security.html
-         */
-        //$this->loadComponent('Security');
-        //$this->loadComponent('Csrf');
+		$this->loadComponent('Auth', [
+             'authenticate' => [
+                'Form' => [
+                    'userModel'=>'players',
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ], 
+            'loginAction' => [
+                'controller' => 'Arenas',
+                'action' => 'login'
+            ],
+			'loginRedirect' =>[
+				'controller' => 'Arenas',
+				'action' => 'fighter'
+			],
+            // If the user arrives on an unauthorized page,
+            // redirects to the previous page.
+            'unauthorizedRedirect' => $this->referer()
+        ]);
     }
 
     /**
@@ -74,6 +84,5 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
     }
-	
 	
 }
