@@ -1,6 +1,6 @@
 
 
-<div class="users form">
+<div >
 <?= $this->Flash->render() ?>
 <?= $this->Form->create() ?>
     <fieldset>

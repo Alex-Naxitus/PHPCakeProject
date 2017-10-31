@@ -45,25 +45,7 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-			
-			$this->loadComponent('Auth', [
-             'authenticate' => [
-                'Form' => [
-                    'userModel'=>'users',
-                    'fields' => [
-                        'username' => 'email',
-                        'password' => 'password'
-                    ]
-                ]
-            ], 
-            'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'login'
-            ],
-            // If the user arrives on an unauthorized page,
-            // redirects to the previous page.
-            'unauthorizedRedirect' => $this->referer()
-        ]);
+        
 		
 		  
 
@@ -93,8 +75,5 @@ class AppController extends Controller
         }
     }
 	
-	public function beforeFilter(Event $event)
-    {
-        $this->Auth->allow(['index', 'view', 'display', 'event','fighter','sight']);
-    }
+	
 }
