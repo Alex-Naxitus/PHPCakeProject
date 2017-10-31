@@ -686,6 +686,26 @@ $this->set('recentevents',$recentevents);
 
 public function login()
 {
+	
+	$order=$this->request->getData();
+	
+	$this->loadModel('Users');
+	
+	if(isset($order['email'])&&isset($order['password'])
+	{
+		
+		$reeluser = $this->Users->find('all',array('conditions' => array('Users.email' => $order['email'], 'Users.password' => $order['password'] )));
+
+		$this->set('recentevents',$reeluser);
+		
+		
+	}
+	else
+	{
+		$this->Flash->success("Email or password field not filled");
+		
+	}
+	
 
 }
 
