@@ -21,18 +21,21 @@ public function index()
 
 public function login()
     { 
-	
 		
 		
-        if ($this->request->is('post')) {
-			
+        if ($this->request->is('post')){
             $user = $this->Auth->identify();
+			
+			
 			
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
+			else
+			{
             $this->Flash->error(__('Invalid email or password, try again'));
+			}
         }
 		
 		
@@ -223,6 +226,12 @@ public function sight()
 	$this->loadModel('Fighters');
 	$this->set('efighter',$this->Fighters->get($fighterid2));
 	
+	$fighterid=1;
+	$this->loadModel('Fighters');
+	$fighters= TableRegistry :: get('Fighters');
+	$fighter = $fighters->get($fighterid);
+	$fighter = $this->Fighters->get($fighterid);
+	$this->set('myfighter',$fighter);
 	
 	$myattack=0;
 	
@@ -230,6 +239,11 @@ public function sight()
 	$myattackaction="";
 	$this->loadModel('Tools');
     $tools= TableRegistry :: get('Tools');
+	
+	$testtools=$this->Tools->find('all');
+	
+	if(!$testtools->isEmpty()){
+	
     for($i=1;$i<12;$i++)
     {
     ${'tool'.$i}=$tools->get($i);
@@ -237,11 +251,10 @@ public function sight()
     $this->set('tool'.$i,${'tool'.$i});    
         
     }         
-
 	
-	$fighterid=1;
-	$this->loadModel('Fighters');
-	$this->set('myfighter',$this->Fighters->get($fighterid));
+	
+	
+	
 	if ($this->request->is('post')) {
 	$order=$this->request->getData();
 	$myfighter2;
@@ -694,6 +707,12 @@ public function sight()
 		}
     
 	}
+	}
+	}
+	else{
+		$fighter->current_health=0;
+		$this->Fighters->save($fighter);
+		$this->set('myfighter',$fighter);
 	}
 }
 

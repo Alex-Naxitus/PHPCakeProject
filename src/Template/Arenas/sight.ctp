@@ -10,31 +10,37 @@
 <?= $this->Form->end() ?>
 </div>
 
-
-<?php echo " level : ".$myfighter->level." - xp : ".$myfighter->xp." - current health : ".$myfighter->current_health." - strength : ".$myfighter->skill_strength." - sight : ".$myfighter->skill_sight."\n"; ?>
-<?php echo " - enemy health : ".$efighter->current_health." - enemy level : ".$efighter->level."\n"; ?>
-
-
-<table>
-<tr>
-    <th></th>
-    <th>1</th> 
-    <th>2</th>
-	<th>3</th>
-	<th>4</th>
-	<th>5</th>
-	<th>6</th>
-	<th>7</th>
-	<th>8</th>
-    <th>9</th> 
-    <th>10</th>
-	<th>11</th>
-	<th>12</th>
-	<th>13</th>
-	<th>14</th>
-	<th>15</th>
-  </tr>
 <?php
+
+if($myfighter->current_health!=0){
+
+echo " level : ".$myfighter->level." - xp : ".$myfighter->xp." - current health : ".$myfighter->current_health." - strength : ".$myfighter->skill_strength." - sight : ".$myfighter->skill_sight."\n";
+echo " - enemy health : ".$efighter->current_health." - enemy level : ".$efighter->level."\n";
+
+
+echo"<table>";
+echo"<tr>";
+    echo"<th></th>";
+    echo"<th>1</th>"; 
+    echo"<th>2</th>";
+	echo"<th>3</th>";
+	echo"<th>4</th>";
+	echo"<th>5</th>";
+	echo"<th>6</th>";
+	echo"<th>7</th>";
+	echo"<th>8</th>";
+    echo"<th>9</th>";
+    echo"<th>10</th>";
+	echo"<th>11</th>";
+	echo"<th>12</th>";
+	echo"<th>13</th>";
+	echo"<th>14</th>";
+	echo"<th>15</th>";
+echo "</tr>";
+
+
+
+
 
 for($i=1;$i<11;$i++)
 {
@@ -83,14 +89,19 @@ if($myfighter->coordinate_x==$j && $myfighter->coordinate_y==$i ){echo "<td>X</t
 
 	}
 
+}
 
 
+echo "</tr>";
 }
 
 
 
+}
+else{ 
 
-echo "</tr>";
+echo "<h4>Please go to Fighter and generate a new fighter first !</h4>";
+
 }
 ?>
 
